@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluescreen</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1485/1485235.png" type="image/png"> <!-- Nová ikonka -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            cursor: none;
+            background-color: blue; /* Modré pozadí */
+        }
+        #fullscreenImage {
+            width: 110%; /* Trochu větší obrázek než okno prohlížeče */
+            height: 110%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: fadeIn 5s; /* Použití CSS animace */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="fullscreenImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bsodwindows10.png/1200px-Bsodwindows10.png" alt="Obrázek" draggable="false"> <!-- Přidán atribut draggable="false" -->
+    
+    <script>
+        // Funkce pro aktivaci režimu celé obrazovky
+        function goFullscreen() {
+            const element = document.documentElement;
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+
+            // Skrýt kurzor
+            document.body.style.cursor = 'none';
+        }
+
+        // Počkat na událost kliknutí na stránku pro aktivaci fullscreen
+        document.addEventListener('click', goFullscreen);
+    </script>
+</body>
+</html>
